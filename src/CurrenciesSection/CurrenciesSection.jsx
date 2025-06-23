@@ -1,13 +1,17 @@
 import CurrenciesTable from "../AvailableCurrenciesTable/CurrenciesTable";
 import AddCurrencyForm from "../AddCurrencyForm/AddCurrencyForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import qs from "qs";
+import {useError} from "../ErrorContextFunctions";
 
 const API = `http://localhost:8080/CurrencyExchanger-1.0/currencies`;
 
 export default function CurrenciesSection() {
   var [currencies, setCurrencies] = useState([]);
+  const clearError = useError()['clearError'];
+  const setError = useError()['setError'];
+  //console.log('currenciesSection', clearError, setError);
 
   useEffect(() => {
     const fetchCurrencies = () => {
@@ -17,7 +21,8 @@ export default function CurrenciesSection() {
           setCurrencies(result.data);
         })
         .catch((error) => {
-          console.log("fetch error", error);
+          
+          console.log("fetch error", error.response.data.message);
         });
     };
 
@@ -44,7 +49,8 @@ export default function CurrenciesSection() {
           ]);
         })
         .catch((error) => {
-          console.log("add error", error);
+          setError(error.response.data.message);
+          console.log("add error", error.response.data.message);
         });
     };
 

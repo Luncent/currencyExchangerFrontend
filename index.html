@@ -1,102 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="src/css/bootstrap.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CurrencyExchanger</title>
-  </head>
-  <body>
+</head>
+
+<body>
+    <div id="errorModal">
+
+    </div>
+
     <div id="root" class="container">
 
-      <section class="mt-xxl-5 pb-5">
-        <div class="row">
-          <div class="col col-6">
-            <h2>Add New Exchange Rate</h2>
-            <form id="add-exchange-rate">
-              <div class="form-group">
-                <label for="new-rate-base-currency">Base currency</label>
-                <select
-                  class="form-control"
-                  name="baseCurrencyCode"
-                  id="new-rate-base-currency"
-                >
+
+        <section class="mt-xxl-5 pb-5">
+            <div class="row">
+                <div class="col col-6">
+                    <h2>Add New Exchange Rate</h2>
+                    <form id="add-exchange-rate">
+                        <div class="form-group">
+                            <label for="new-rate-base-currency">Base currency</label>
+                            <select class="form-control" name="baseCurrencyCode" id="new-rate-base-currency">
                   <option value="AUD">AUD</option>
                   <option value="AFN">AFN</option>
                   <option value="USD">USD</option>
                   <option value="BYN">BYN</option>
                   <option value="RUB">RUB</option>
                 </select>
-              </div>
-              <div class="form-group mt-3">
-                <label for="new-rate-target-currency">Target currency</label>
-                <select
-                  class="form-control"
-                  name="targetCurrencyCode"
-                  id="new-rate-target-currency"
-                >
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="new-rate-target-currency">Target currency</label>
+                            <select class="form-control" name="targetCurrencyCode" id="new-rate-target-currency">
                   <option value="AUD">AUD</option>
                   <option value="AFN">AFN</option>
                   <option value="USD">USD</option>
                   <option value="BYN">BYN</option>
                   <option value="RUB">RUB</option>
                 </select>
-              </div>
-              <div class="form-group mt-3">
-                <label for="exchange-rate">Exchange Rate</label>
-                <input
-                  type="text"
-                  placeholder="1.23"
-                  class="form-control"
-                  name="rate"
-                  id="exchange-rate"
-                />
-              </div>
-              <button type="submit" class="btn btn-primary mt-3">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="exchange-rate">Exchange Rate</label>
+                            <input type="text" placeholder="1.23" class="form-control" name="rate" id="exchange-rate" />
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">
                 Add Exchange Rate
               </button>
-            </form>
-          </div>
-
-          <div class="col col-6">
-            <h2>Currency Conversion</h2>
-            <form id="convert">
-              <div class="form-group">
-                <label for="convert-base-currency">Base Currency</label>
-                <select class="form-control" id="convert-base-currency">
-                  <option value="AUD">AUD</option>
-                  <option value="AFN">AFN</option>
-                  <option value="USD">USD</option>
-                  <option value="BYN">BYN</option>
-                  <option value="RUB">RUB</option>
-                </select>
-              </div>
-              <div class="form-group mt-3">
-                <label for="convert-target-currency">Target Currency</label>
-                <select class="form-control" id="convert-target-currency">
-                  <option value="AUD">AUD</option>
-                  <option value="AFN">AFN</option>
-                  <option value="USD">USD</option>
-                  <option value="BYN">BYN</option>
-                  <option value="RUB">RUB</option>
-                </select>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <div class="form-group mt-3">
-                    <label for="convert-amount">Amount</label>
-                    <input
-                      placeholder="1.23"
-                      type="text"
-                      class="form-control"
-                      id="convert-amount"
-                    />
-                  </div>
+                    </form>
                 </div>
-                <div class="col-6">
-                  <div class="form-group mt-3">
-                    <label for="convert-converted-amount"
-                      >Converted amount</label
+
+                <div class="col col-6">
+                    <h2>Currency Conversion</h2>
+                    <form id="convert">
+                        <div class="form-group">
+                            <label for="convert-base-currency">Base Currency</label>
+                            <select class="form-control" id="convert-base-currency">
+                  <option value="AUD">AUD</option>
+                  <option value="AFN">AFN</option>
+                  <option value="USD">USD</option>
+                  <option value="BYN">BYN</option>
+                  <option value="RUB">RUB</option>
+                </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="convert-target-currency">Target Currency</label>
+                            <select class="form-control" id="convert-target-currency">
+                  <option value="AUD">AUD</option>
+                  <option value="AFN">AFN</option>
+                  <option value="USD">USD</option>
+                  <option value="BYN">BYN</option>
+                  <option value="RUB">RUB</option>
+                </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group mt-3">
+                                    <label for="convert-amount">Amount</label>
+                                    <input placeholder="1.23" type="text" class="form-control" id="convert-amount" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-3">
+                                    <label for="convert-converted-amount">Converted amount</label
                     >
                     <input
                       type="text"
@@ -113,27 +100,6 @@
           </div>
         </div>
       </section>
-
-      <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div
-          id="api-error-toast"
-          class="toast hide"
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          <div class="toast-header">
-            <strong class="me-auto">Error</strong>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="toast"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="toast-body"></div>
-        </div>
-      </div>
     </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

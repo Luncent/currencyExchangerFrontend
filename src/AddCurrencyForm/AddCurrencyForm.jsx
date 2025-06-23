@@ -44,7 +44,9 @@ export default function AddCurrencyForm({ addCurrencyClick }) {
           />
         </div>
         <Button
-          onClick={()=>{addCurrencyClick(name, code, sign);}}
+          onClick={() => {
+            addCurrencyClick(name, code, sign);
+          }}
           className="btn btn-primary btn-sm mt-4"
         >
           Add Currency
