@@ -1,0 +1,7 @@
+const API_HOST = 'http://localhost:8080/CurrencyExchanger-1.0';
+const CURRENCIES_ENDPOINT = API_HOST+'/currencies';
+const EXCHANGE_RATES_ENDPOINT = API_HOST+'/exchangeRates';
+const EXCHANGE_RATE_ENDPOINT = API_HOST+'/exchangeRate';
+const EXCHANGE_ENDPOINT = API_HOST+'/exchange';
+
+export default {EXCHANGE_RATES_ENDPOINT, CURRENCIES_ENDPOINT, EXCHANGE_RATE_ENDPOINT,EXCHANGE_ENDPOINT};

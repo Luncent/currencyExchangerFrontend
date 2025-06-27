@@ -21,7 +21,7 @@ export default function ErrorContextFunctions({ children }) {
   );
 }
 
-function ErrorModal({ message, clearError }) {
+export function ErrorModal({ message, clearError }) {
   //const dialog = useRef();
 
   setTimeout(()=>{

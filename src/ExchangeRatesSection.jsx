@@ -1,41 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 
-export default function ExchangeRatesSection() {
-  var [exchangeRates, setExchangeRates] = useState([
-    {
-      id: 1,
-      baseCurrency: {
-        id: 1,
-        name: "Australian dollar",
-        code: "AUD",
-        sign: "A$",
-      },
-      targetCurrency: {
-        id: 4,
-        name: "Euro",
-        code: "EUR",
-        sign: "€",
-      },
-      rate: 2.59,
-    },
-    {
-      id: 2,
-      baseCurrency: {
-        id: 3,
-        name: "United States dollar",
-        code: "USD",
-        sign: "$",
-      },
-      targetCurrency: {
-        id: 4,
-        name: "Euro",
-        code: "EUR",
-        sign: "€",
-      },
-      rate: 0.99,
-    },
-  ]);
+import Modal from "./Modal";
+import ModalForRateChangeContent from "./ModalForRateChangeContent";
+
+export default function ExchangeRatesSection({ exchangeRates,updateExchangeRate }) {
+  const [selectedCode, setSelectedCode] = useState(null);
+
+  console.log("render exchangeRates");
+  
+  const hideModal = ()=>{
+    setSelectedCode(null);
+  }
 
   return (
     <>
@@ -50,7 +26,7 @@ export default function ExchangeRatesSection() {
             </tr>
           </thead>
           <tbody>
-            {exchangeRates.map((rate) => (
+            {exchangeRates && exchangeRates.map((rate) => (
               <tr key={rate.id}>
                 <td>{`${rate.baseCurrency.code}${rate.targetCurrency.code}`}</td>
                 <td>{rate.rate}</td>
@@ -59,6 +35,15 @@ export default function ExchangeRatesSection() {
                     className="btn btn-secondary btn-sm exchange-rate-edit"
                     data_bs_toggle="modal"
                     data_bs_target="#edit-exchange-rate-modal"
+                    onClick={() => {
+                      setSelectedCode(
+                        `${rate.baseCurrency.code}${rate.targetCurrency.code}`
+                      );
+                      console.log(
+                        "selecting rate with code:" +
+                          `${rate.baseCurrency.code}${rate.targetCurrency.code}`
+                      );
+                    }}
                   >
                     Edit
                   </Button>
@@ -69,49 +54,11 @@ export default function ExchangeRatesSection() {
         </table>
       </section>
 
-      <div
-        className="modal fade"
-        id="edit-exchange-rate-modal"
-        tabIndex="-1"
-        role="dialog"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Edit Exchange Rate</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-                <div className="form-group">
-                  <label htmlFor="exchange-rate-input">Exchange Rate:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="exchange-rate-input"
-                    defaultValue="1.00"
-                  />
-                </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {selectedCode && (
+        <Modal isOpen={selectedCode} closeModal={hideModal} updateExchangeRate={updateExchangeRate}>
+          <ModalForRateChangeContent selectedCode={selectedCode}></ModalForRateChangeContent>
+        </Modal>
+      )}
     </>
   );
 }
